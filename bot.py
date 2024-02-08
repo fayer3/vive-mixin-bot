@@ -1,0 +1,26 @@
+import discord
+
+# read toekn
+with open('token.txt', 'r') as file:
+    TOKEN = file.read().split('=')[1]
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+
+words = [["youre", "you're"], ["im", "i'm"], ["Im", "I'm"], ["hes", "he's"], ["shes", "she's"]]
+
+@client.event
+async def on_ready():
+    print("Bot successfully logged in as " + client.user)
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    for word in words:
+        if word[0] in message.content:
+            await message.channel.send(str(message.author) + ", you misspelled " + word[1] + " as " + word[0], reference=message)
+
+client.run(TOKEN)
