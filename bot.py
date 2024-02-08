@@ -13,7 +13,7 @@ words = [["youre", "you're"], ["im", "i'm"], ["Im", "I'm"], ["hes", "he's"], ["s
 
 @client.event
 async def on_ready():
-    print("Bot successfully logged in as " + client.user)
+    print("Bot successfully logged in as " + str(client.user))
 
 @client.event
 async def on_message(message):
